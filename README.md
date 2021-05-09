@@ -1,5 +1,5 @@
 # Mountain
-Development API used to streamline plugin development process. 
+Development API used to streamline my private plugin development process. 
 
 This resource will be used in many of my major private projects. The project itself will support both proxy and spigot development.
 
