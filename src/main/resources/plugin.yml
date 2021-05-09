@@ -1,0 +1,3 @@
+name: MountainBukkit
+main: me.loggits.mountain.bukkit.MountainProvider
+version: ${project.version}
