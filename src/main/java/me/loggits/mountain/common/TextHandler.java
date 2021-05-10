@@ -38,21 +38,28 @@ public abstract class TextHandler {
         sendMessage(player, footer);
     }
 
-    public static List<String> translateCollection(List<String> l) {
-        return l.stream()
-                .map(string -> ChatColor.translateAlternateColorCodes('&', string))
-                .collect(Collectors.toList());
+
+    public static List<String> translateCollection(List<String> list) {
+        return translateCollection(list, false);
     }
 
-    public static String translateString(String s) {
-        return ChatColor.translateAlternateColorCodes('&', s);
+    public static List<String> translateCollection(List<String> list, boolean replaceHex) {
+        return list.stream()
+                   .map(message -> translateString(message, replaceHex))
+                   .collect(Collectors.toList());
     }
 
-    public static String translateString2(String s) {
-        String output = translateString(s);
-        Matcher matcher = rgb.matcher(output);
-        while (matcher.find()) {
-            output = output.replace(matcher.group(), ChatColor.of(matcher.group(1)).toString());
+    public static String translateString(String message) {
+        return translateString(message, false);
+    }
+
+    public static String translateString(String message, boolean replaceHex) {
+        String output = ChatColor.translateAlternateColorCodes('&', message);
+        if (replaceHex) {
+            Matcher matcher = rgb.matcher(output);
+            while (matcher.find()) {
+                output = output.replace(matcher.group(), ChatColor.of(matcher.group(1)).toString());
+            }
         }
         return output;
     }
@@ -81,11 +88,7 @@ public abstract class TextHandler {
 
     public static void messageSender(CommandSender player, String header, String footer, List<String> lines) {
         TextHandler.sendMessage(player, header);
-        lines.forEach(x -> sendMessage(
-                player,
-                TextComponent.fromLegacyText(ChatColor.translateAlternateColorCodes('&', x)
-                                                      .replace("\\n", "\n"))
-        ));
+        lines.forEach(x -> sendMessage(player, TextComponent.fromLegacyText(x.replace("\\n", "\n"))));
         TextHandler.sendMessage(player, footer);
     }
 
