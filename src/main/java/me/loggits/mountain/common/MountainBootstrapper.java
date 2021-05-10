@@ -11,7 +11,7 @@ public interface MountainBootstrapper {
 
     SchedulerAdapter getScheduler();
 
-    ConfigAdapter getConfiguration();
+    Class<? extends ConfigAdapter> getConfigSystem();
 
     String getVersion();
 

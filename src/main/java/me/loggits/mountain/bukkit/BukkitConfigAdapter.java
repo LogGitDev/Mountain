@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
-public class BukkitConfig implements ConfigAdapter {
+public class BukkitConfigAdapter implements ConfigAdapter {
     private static FileConfiguration config;
     String fileName;
     String sub;
@@ -25,15 +25,15 @@ public class BukkitConfig implements ConfigAdapter {
     private File file;
     private JavaPlugin plugin;
 
-    public BukkitConfig(JavaPlugin plugin, String fileName, boolean apply) {
+    public BukkitConfigAdapter(JavaPlugin plugin, String fileName, boolean apply) {
         this(plugin, "", fileName, apply);
     }
 
-    public BukkitConfig(JavaPlugin plugin, File file, boolean apply) {
+    public BukkitConfigAdapter(JavaPlugin plugin, File file, boolean apply) {
         this(plugin, file.getParent(), file.getName(), apply);
     }
 
-    public BukkitConfig(JavaPlugin plugin, String subFolder, String fileName, boolean apply) {
+    public BukkitConfigAdapter(JavaPlugin plugin, String subFolder, String fileName, boolean apply) {
         this.sub = subFolder;
         this.fileName = fileName;
         this.apply = apply;
